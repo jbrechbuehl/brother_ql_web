@@ -70,7 +70,8 @@ def get_label_context(request):
       'margin_bottom': float(d.get('margin_bottom', 45))/100.,
       'margin_left':   float(d.get('margin_left',   35))/100.,
       'margin_right':  float(d.get('margin_right',  35))/100.,
-    }
+      'cut':           d.get('cut', 'True').lower() == 'true',
+      }
     context['margin_top']    = int(context['font_size']*context['margin_top'])
     context['margin_bottom'] = int(context['font_size']*context['margin_bottom'])
     context['margin_left']   = int(context['font_size']*context['margin_left'])
@@ -201,7 +202,7 @@ def print_text():
     red = False
     if 'red' in context['label_size']:
         red = True
-    create_label(qlr, im, context['label_size'], red=red, threshold=context['threshold'], cut=True, rotate=rotate)
+    create_label(qlr, im, context['label_size'], red=red, threshold=context['threshold'], cut=context['cut'], rotate=rotate)
 
     if not DEBUG:
         try:
